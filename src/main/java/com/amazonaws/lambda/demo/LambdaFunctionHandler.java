@@ -64,11 +64,11 @@ public class LambdaFunctionHandler implements RequestHandler<Map<String, Object>
                         	int x = (int)point.get(1);
                         	double d = (double)x;
                         	x1 = (double) ((int)point.get(0));
-                        	x2 = d;
+                        	x2 = 1 - d;
                         }
                         else {
                         	x1 = (double) ((int)point.get(0));
-                            x2 = (double) point.get(1);
+                            x2 = 1 -(double) point.get(1);
                         }
                         f.addPoint((double)x1, x2);
                     }
