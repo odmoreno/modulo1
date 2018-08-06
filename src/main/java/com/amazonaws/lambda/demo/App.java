@@ -52,7 +52,7 @@ public class App {
 	Ui es la funcion de utilidad = -fi*EAT(mi)
 	EAT(mi) = hi(mi)*cdi + (1-h(mi))*bdi
 	*/
-    private double calculateFunction(ArrayList<UnivariateFunction> functions, double [] ms, double []weights){
+    private double calculateFunction(ArrayList<UnivariateFunction> functions, double [] ms, double []weights,  double[] bdi, double[] cdi, double limit[]){
         double result=0;
 
         int numFunctions = functions.size();
@@ -63,6 +63,11 @@ public class App {
             f = 30;
             UnivariateFunction h = functions.get(i);
             double test = ms[i];
+            
+            if (ms[i]> limit[i]){
+                ms[i] = limit[i];
+            }
+            
             double h_i = h.value(ms[i]);
             double EAT = h_i*cd + (1.0- h_i)*bd;
             double Ui = -1*f*EAT;
@@ -149,7 +154,7 @@ public class App {
         return alphas;
     }
     public double [] probabilisticAdactiveSearch(int k, int j, ArrayList<UtilityFunction> functions, double[] weights,
-            int limit, double M, double[] m_){
+            int limit, double M, double[] m_, double[] bdi, double[] cdi, double[] limitM ){
 	Solution[] solutions;
 	double[] alpha;
 	int n;
@@ -171,7 +176,7 @@ public class App {
 		double []xs = new double[n];
 		dirichlet.nextPoint(xs);
 		double []ms = Denormalize(xs, m_ , M);
-		double result = calculateFunction(hitRateCurves,ms,weights);
+		double result = calculateFunction(hitRateCurves,ms,weights, bdi, cdi, limitM);
 		solutions[i] = new Solution(xs, result);
 	}
 	int count=0;
@@ -185,7 +190,7 @@ public class App {
 			double [] xs = new double[n];
 			dirichlet.nextPoint(xs);
 			double []ms = Denormalize(xs, m_ , M);
-			double result =calculateFunction(hitRateCurves,ms,weights); //calculamos el valor de la funcion con la solucion generada
+			double result =calculateFunction(hitRateCurves,ms,weights, bdi, cdi, limitM); //calculamos el valor de la funcion con la solucion generada
 			
 			int index=getMinSolution(solutions); // encontramos menos buena
 			//si la solucion generada es mejor que la peor guardada la remplazamos

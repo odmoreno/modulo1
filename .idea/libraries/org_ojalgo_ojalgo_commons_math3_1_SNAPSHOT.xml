@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org.ojalgo:ojalgo-commons-math3:1-SNAPSHOT" type="repository">
+    <properties maven-id="org.ojalgo:ojalgo-commons-math3:1-SNAPSHOT" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/ojalgo-commons-math3-1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
